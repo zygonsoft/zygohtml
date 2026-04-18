@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ZYGOBASE Services</title>
+  <meta name="description" content="24x7 remote DBA for Oracle, SQL Server, PostgreSQL, and MongoDB. Monitoring, HA/DR, tuning, and cloud migrations."/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --yellow: #fef9c3;
+      --yellow-bg: #fef3c7;
+      --slate-900: #0f172a;
+      --slate-800: #1e293b;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748b;
+      --slate-200: #e2e8f0;
+      --slate-100: #f1f5f9;
+      --slate-50: #f8fafc;
+      --white: #ffffff;
+      --green-600: #16a34a;
+      --radius: 16px;
+    }
+    body { font-family: 'DM Sans', sans-serif; background: var(--yellow-bg); color: var(--slate-800); min-height: 100vh; }
+
+    /* NAVBAR */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255,255,255,0.85); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--slate-200);
+    }
+    nav {
+      max-width: 1280px; margin: 0 auto;
+      padding: 12px 32px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+    .nav-logo {
+      height: 32px; width: 32px; border-radius: 10px;
+      background: var(--slate-900); color: #fff;
+      display: grid; place-items: center; font-weight: 700; font-size: 16px;
+    }
+    .nav-name { font-weight: 600; letter-spacing: -0.02em; color: var(--slate-900); }
+    .nav-links { display: flex; gap: 24px; list-style: none; }
+    .nav-links a { text-decoration: none; font-size: 14px; color: var(--slate-700); transition: color .2s; }
+    .nav-links a:hover { color: var(--slate-900); }
+    .nav-cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--slate-900); color: #fff;
+      padding: 8px 18px; border-radius: var(--radius);
+      font-size: 14px; font-weight: 500; text-decoration: none;
+      transition: background .2s;
+    }
+    .nav-cta:hover { background: var(--slate-800); }
+    .nav-cta svg { width: 16px; height: 16px; }
+    @media (max-width: 768px) { .nav-links { display: none; } }
+
+    /* HERO */
+    .hero {
+      max-width: 1280px; margin: 0 auto;
+      padding: 80px 32px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+    }
+    @media (max-width: 900px) { .hero { grid-template-columns: 1fr; padding: 48px 20px; } }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 500; color: var(--slate-600);
+      background: #fff; border: 1px solid var(--slate-200);
+      border-radius: 999px; padding: 4px 12px;
+    }
+    .hero-badge svg { width: 14px; height: 14px; }
+    .hero h1 {
+      margin-top: 16px;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 800; line-height: 1.15;
+      letter-spacing: -0.03em; color: var(--slate-900);
+    }
+    .hero p { margin-top: 16px; color: var(--slate-600); font-size: 16px; line-height: 1.7; }
+    .hero-btns { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn-primary {
+      background: var(--slate-900); color: #fff;
+      padding: 12px 22px; border-radius: var(--radius);
+      font-size: 14px; font-weight: 500; text-decoration: none;
+      transition: background .2s;
+    }
+    .btn-primary:hover { background: var(--slate-800); }
+    .btn-secondary {
+      background: #fff; color: var(--slate-900);
+      padding: 12px 22px; border-radius: var(--radius);
+      font-size: 14px; font-weight: 500; text-decoration: none;
+      border: 1px solid var(--slate-200); transition: background .2s;
+    }
+    .btn-secondary:hover { background: var(--slate-50); }
+    .hero-trust {
+      margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px;
+      font-size: 12px; color: var(--slate-500);
+    }
+    .hero-trust span { display: flex; align-items: center; gap: 6px; }
+    .hero-trust svg { width: 16px; height: 16px; color: var(--green-600); flex-shrink: 0; }
+
+    /* HERO CARD */
+    .hero-card {
+      background: #fff; border: 1px solid var(--slate-200);
+      border-radius: 20px; box-shadow: 0 2px 12px rgba(0,0,0,.06);
+      padding: 24px;
+    }
+    .icon-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .icon-tile {
+      border: 1px solid var(--slate-200); border-radius: 14px;
+      padding: 16px 8px; text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      background: var(--slate-50);
+    }
+    .icon-tile svg { width: 24px; height: 24px; color: var(--slate-700); }
+    .icon-tile span { font-size: 12px; font-weight: 500; color: var(--slate-700); }
+    .sla-banner {
+      margin-top: 16px; background: var(--slate-900); color: #fff;
+      border-radius: 14px; padding: 16px;
+    }
+    .sla-banner strong { display: block; font-size: 14px; font-weight: 600; }
+    .sla-banner p { font-size: 12px; opacity: .85; margin-top: 4px; }
+
+    /* SECTIONS */
+    .section { padding: 64px 0; background: var(--yellow-bg); border-top: 1px solid var(--slate-200); }
+    .section-inner { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+    @media (max-width: 640px) { .section-inner { padding: 0 20px; } }
+    .section-title { font-size: clamp(22px, 3vw, 30px); font-weight: 700; color: var(--slate-900); text-align: center; }
+    .section-sub { margin-top: 8px; text-align: center; color: var(--slate-600); max-width: 720px; margin-left: auto; margin-right: auto; }
+
+    /* FEATURE CARDS */
+    .feature-grid { margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    @media (max-width: 900px) { .feature-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 580px) { .feature-grid { grid-template-columns: 1fr; } }
+    .feature-card {
+      background: #fff; border: 1px solid var(--slate-200);
+      border-radius: var(--radius); padding: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.04); transition: box-shadow .2s;
+    }
+    .feature-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.09); }
+    .feature-card-head { display: flex; align-items: center; gap: 10px; }
+    .feature-icon {
+      height: 36px; width: 36px; border-radius: 10px;
+      background: var(--slate-900); color: #fff;
+      display: grid; place-items: center; flex-shrink: 0;
+    }
+    .feature-icon svg { width: 20px; height: 20px; }
+    .feature-card h3 { font-size: 15px; font-weight: 600; color: var(--slate-900); }
+    .feature-card p { margin-top: 10px; font-size: 14px; color: var(--slate-700); line-height: 1.6; }
+
+    /* PLAN CARDS */
+    .plan-grid { margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    @media (max-width: 700px) { .plan-grid { grid-template-columns: 1fr; } }
+    .plan-card {
+      background: #fff; border: 1px solid var(--slate-200);
+      border-radius: var(--radius); padding: 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.04);
+      display: flex; flex-direction: column;
+    }
+    .plan-card-head { display: flex; align-items: center; justify-content: space-between; }
+    .plan-card h3 { font-size: 18px; font-weight: 600; color: var(--slate-900); }
+    .plan-hours {
+      font-size: 12px; background: var(--slate-100); border: 1px solid var(--slate-200);
+      border-radius: 999px; padding: 3px 12px; color: var(--slate-600);
+    }
+    .plan-rate { margin-top: 12px; font-size: 32px; font-weight: 800; color: var(--slate-900); }
+    .plan-monthly { font-size: 12px; color: var(--slate-500); }
+    .plan-ideal { margin-top: 8px; font-size: 14px; color: var(--slate-700); }
+    .plan-bullets { margin-top: 16px; list-style: none; display: grid; gap: 8px; }
+    .plan-bullets li { display: flex; align-items: flex-start; gap: 8px; font-size: 14px; color: var(--slate-700); }
+    .plan-bullets svg { width: 16px; height: 16px; margin-top: 2px; flex-shrink: 0; color: var(--green-600); }
+    .plan-cta {
+      margin-top: 20px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      background: var(--slate-900); color: #fff;
+      padding: 12px 22px; border-radius: var(--radius);
+      font-size: 14px; font-weight: 500; text-decoration: none; transition: background .2s;
+    }
+    .plan-cta:hover { background: var(--slate-800); }
+    .plan-cta svg { width: 16px; height: 16px; }
+    .plan-note { margin-top: 24px; text-align: center; font-size: 12px; color: var(--slate-500); }
+    .plan-note a { text-decoration: underline; color: inherit; }
+
+    /* FOOTER */
+    footer {
+      padding: 40px 0; background: #fff;
+      border-top: 1px solid var(--slate-200);
+    }
+    .footer-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 32px;
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .footer-copy { font-size: 14px; color: var(--slate-600); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 14px; color: var(--slate-600); text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: var(--slate-900); }
+
+    /* ANIMATE */
+    @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+    .fade-up { animation: fadeUp .6s ease both; }
+    .fade-up-d1 { animation: fadeUp .6s .1s ease both; }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header>
+  <nav>
+    <a href="index.html" class="nav-brand">
+      <div class="nav-logo">Z</div>
+      <span class="nav-name">ZYGOBASE</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">
+      Get a Quote
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section>
+  <div class="hero">
+    <div class="fade-up">
+      <div class="hero-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        24x7 Remote DBA for Oracle · SQL Server · PostgreSQL · MongoDB
+      </div>
+      <h1>Keep your databases fast, secure, and always available</h1>
+      <p>ZyGoBase delivers proactive monitoring, HA/DR architecture, performance tuning, and cloud migrations across Oracle, SQL Server, PostgreSQL, and MongoDB.</p>
+      <div class="hero-btns">
+        <a href="pricing.html" class="btn-primary">View Plans</a>
+        <a href="services.html" class="btn-secondary">Explore Services</a>
+      </div>
+      <div class="hero-trust">
+        <span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          18+ years DBA expertise
+        </span>
+        <span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Certified Oracle/SQL Server/PostgreSQL/MongoDB
+        </span>
+        <span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Global coverage: US · Europe · Middle East
+        </span>
+      </div>
+    </div>
+
+    <div class="fade-up-d1">
+      <div class="hero-card">
+        <div class="icon-grid">
+          <div class="icon-tile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+            <span>Oracle</span>
+          </div>
+          <div class="icon-tile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+            <span>SQL Server</span>
+          </div>
+          <div class="icon-tile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+            <span>PostgreSQL</span>
+          </div>
+          <div class="icon-tile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+            <span>MongoDB</span>
+          </div>
+          <div class="icon-tile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            <span>Cloud DR</span>
+          </div>
+          <div class="icon-tile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span>Security</span>
+          </div>
+        </div>
+        <div class="sla-banner">
+          <strong>SLA-backed Monitoring</strong>
+          <p>Proactive alerts, automation, and root-cause analysis to keep RTO/RPO in check.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE DO -->
+<section class="section">
+  <div class="section-inner">
+    <h2 class="section-title">What we do</h2>
+    <p class="section-sub">End-to-end database reliability across on‑prem &amp; cloud. We architect, secure, and optimize so you can focus on your product.</p>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-card-head">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>24x7 Monitoring &amp; Support</h3>
+        </div>
+        <p>Proactive incident response, alert tuning, patching, and runbooks.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-head">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+          </div>
+          <h3>Performance Tuning</h3>
+        </div>
+        <p>Query optimization, indexing strategies, workload and capacity planning.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-head">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3>HA/DR &amp; Cloud Migrations</h3>
+        </div>
+        <p>RAC/Data Guard, AlwaysOn, replicas, sharding; OCI/AWS/Azure/RDS/Atlas.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-head">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <h3>Backup &amp; Recovery</h3>
+        </div>
+        <p>Automated validated backups, PITR testing, immutable storage.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-head">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <h3>Security &amp; Compliance</h3>
+        </div>
+        <p>Hardening, patching, least-privilege, vulnerability fixes, auditing.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-head">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <h3>Modernization</h3>
+        </div>
+        <p>Move to managed services, right-size instances, cut infra costs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING PREVIEW -->
+<section class="section" style="border-top:none;">
+  <div class="section-inner">
+    <h2 class="section-title">Services &amp; Pricing</h2>
+    <p class="section-sub">Transparent, flexible packages. Scale up or down anytime.</p>
+
+    <div class="plan-grid">
+      <div class="plan-card">
+        <div class="plan-card-head">
+          <h3>Standard</h3>
+          <span class="plan-hours">10 hrs / week</span>
+        </div>
+        <div class="plan-rate">$25/hr</div>
+        <div class="plan-monthly">~ $1,000 / month</div>
+        <div class="plan-ideal">SMBs with lighter DBA needs</div>
+        <ul class="plan-bullets">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            24x7 monitoring &amp; alerts
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Monthly health checks
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Backup &amp; patch cadences
+          </li>
+        </ul>
+        <a href="contact.html" class="plan-cta">
+          Choose Standard
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+
+      <div class="plan-card">
+        <div class="plan-card-head">
+          <h3>Extended</h3>
+          <span class="plan-hours">20 hrs / week</span>
+        </div>
+        <div class="plan-rate">$35/hr</div>
+        <div class="plan-monthly">~ $2,800 / month</div>
+        <div class="plan-ideal">Mid-sized businesses with heavier DBA workloads</div>
+        <ul class="plan-bullets">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Dedicated DBA time blocks
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            Advanced performance tuning
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            HA/DR runbooks &amp; tests
+          </li>
+        </ul>
+        <a href="contact.html" class="plan-cta">
+          Choose Extended
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <p class="plan-note">
+      Need a custom scope or dedicated on-call? <a href="contact.html">Contact us</a> for an enterprise quote.
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <span class="footer-copy">© 2025 Zycube. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="services.html">Services</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Plans & Pricing – ZYGOBASE</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --yellow-bg: #fef3c7;
+      --slate-900: #0f172a;
+      --slate-800: #1e293b;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748b;
+      --slate-200: #e2e8f0;
+      --slate-100: #f1f5f9;
+      --slate-50: #f8fafc;
+      --white: #ffffff;
+      --green-600: #16a34a;
+      --radius: 16px;
+    }
+    body { font-family: 'DM Sans', sans-serif; background: var(--yellow-bg); color: var(--slate-800); min-height: 100vh; }
+
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255,255,255,0.85); backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--slate-200);
+    }
+    nav {
+      max-width: 1280px; margin: 0 auto;
+      padding: 12px 32px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+    .nav-logo {
+      height: 32px; width: 32px; border-radius: 10px;
+      background: var(--slate-900); color: #fff;
+      display: grid; place-items: center; font-weight: 700; font-size: 16px;
+    }
+    .nav-name { font-weight: 600; letter-spacing: -0.02em; color: var(--slate-900); }
+    .nav-links { display: flex; gap: 24px; list-style: none; }
+    .nav-links a { text-decoration: none; font-size: 14px; color: var(--slate-700); transition: color .2s; }
+    .nav-links a:hover { color: var(--slate-900); }
+    .nav-links .active { color: var(--slate-900); font-weight: 600; }
+    .nav-cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--slate-900); color: #fff;
+      padding: 8px 18px; border-radius: var(--radius);
+      font-size: 14px; font-weight: 500; text-decoration: none; transition: background .2s;
+    }
+    .nav-cta:hover { background: var(--slate-800); }
+    .nav-cta svg { width: 16px; height: 16px; }
+    @media (max-width: 768px) { .nav-links { display: none; } }
+
+    main {
+      max-width: 1280px; margin: 0 auto;
+      padding: 64px 32px;
+      display: grid; gap: 32px;
+    }
+    @media (max-width: 640px) { main { padding: 40px 20px; } }
+
+    main h1 { font-size: clamp(26px, 3.5vw, 36px); font-weight: 700; color: var(--slate-900); }
+    main > p { color: var(--slate-700); max-width: 720px; font-size: 16px; line-height: 1.7; }
+
+    .plan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    @media (max-width: 700px) { .plan-grid { grid-template-columns: 1fr; } }
+
+    .plan-card {
+      background: #fff; border: 1px solid var(--slate-200);
+      border-radius: var(--radius); padding: 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,.04);
+      display: flex; flex-direction: column;
+    }
+    .plan-card-head { display: flex; align-items: center; justify-content: space-between; }
+    .plan-card h3 { font-size: 18px; font-weight: 600; color: var(--slate-900); }
+    .plan-hours {
+      font-size: 12px; background: var(--slate-100); border: 1px solid var(--slate-200);
+      border-radius: 999px; padding: 3px 12px; color: var(--slate-600);
+    }
+    .plan-rate { margin-top: 12px; font-size: 32px; font-weight: 800; color: var(--slate-900); }
+    .plan-monthly { font-size: 12px; color: var(--slate-500); }
+    .plan-ideal { margin-top: 8px; font-size: 14px; color: var(--slate-700); }
+    .plan-bullets { margin-top: 16px; list-style: none; display: grid; gap: 8px; }
+    .plan-bullets li { display: flex; align-items: flex-start; gap: 8px; font-size: 14px; color: var(--slate-700); }
+    .plan-bullets svg { width: 16px; height: 16px; margin-top: 2px; flex-shrink: 0; color: var(--green-600); }
+    .plan-cta {
+      margin-top: 20px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      background: var(--slate-900); color: #fff;
+      padding: 12px 22px; border-radius: var(--radius);
+      font-size: 14px; font-weight: 500; text-decoration: none; transition: background .2s;
+    }
+    .plan-cta:hover { background: var(--slate-800); }
+    .plan-cta svg { width: 16px; height: 16px; }
+
+    footer {
+      padding: 40px 0; background: #fff;
+      border-top: 1px solid var(--slate-200);
+    }
+    .footer-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 32px;
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .footer-copy { font-size: 14px; color: var(--slate-600); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 14px; color: var(--slate-600); text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: var(--slate-900); }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="index.html" class="nav-brand">
+      <div class="nav-logo">Z</div>
+      <span class="nav-name">ZYGOBASE</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="pricing.html" class="active">Pricing</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">
+      Get a Quote
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </nav>
+</header>
+
+<main>
+  <h1>Plans &amp; Pricing</h1>
+  <p>Choose a package that fits your workload. Scale up or down at any time.</p>
+
+  <div class="plan-grid">
+    <div class="plan-card">
+      <div class="plan-card-head">
+        <h3>Standard</h3>
+        <span class="plan-hours">10 hrs / week</span>
+      </div>
+      <div class="plan-rate">$25/hr</div>
+      <div class="plan-monthly">~ $1,000 / month</div>
+      <div class="plan-ideal">SMBs with lighter DBA needs</div>
+      <ul class="plan-bullets">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          24x7 monitoring &amp; alerts
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Monthly health checks
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Backup &amp; patch cadences
+        </li>
+      </ul>
+      <a href="contact.html" class="plan-cta">
+        Choose Standard
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-card-head">
+        <h3>Extended</h3>
+        <span class="plan-hours">20 hrs / week</span>
+      </div>
+      <div class="plan-rate">$35/hr</div>
+      <div class="plan-monthly">~ $2,800 / month</div>
+      <div class="plan-ideal">Mid-sized businesses with heavier DBA workloads</div>
+      <ul class="plan-bullets">
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Dedicated DBA time blocks
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Advanced performance tuning
+        </li>
+        <li>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          HA/DR runbooks &amp; tests
+        </li>
+      </ul>
+      <a href="contact.html" class="plan-cta">
+        Choose Extended
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span class="footer-copy">© 2025 Zycube. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="services.html">Services</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
